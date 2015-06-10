@@ -19,7 +19,7 @@ Simply add a (ideally hidden) DOM element in your document, with an ID and (at l
 
 
 <script>
-  remoteSvg.load(document.getElementById('my-svg'));
+  new RemoteSvg('my-svg');
 </script>
 ```
 
