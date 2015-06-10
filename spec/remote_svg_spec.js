@@ -21,7 +21,7 @@ JS.Test.describe('RemoteSvg', function() { with(this) {
         '<svg>some document</svg>');
 
       assertEqual(1, this.requests.length);
-      assertEqual('<svg>some document</svg>', document.getElementById('my-svg').innerHTML);
+      assertEqual('<svg id="my-svg">some document</svg>', document.getElementById('fixture').innerHTML);
     }});
   }});
 
