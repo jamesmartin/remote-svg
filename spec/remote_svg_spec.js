@@ -2,59 +2,63 @@ JS.Test.describe('RemoteSvg', function() { with(this) {
   fixture("<div id='my-svg' data-remote-svg-uri='http://example.com/my-doc.svg'></div>");
 
   before(function() { with(this) {
-    this.xhr = sinon.useFakeXMLHttpRequest();
-    var requests = this.requests = [];
-
-    this.xhr.onCreate = function(xhr) {
-      requests.push(xhr);
-    };
+    this.server = sinon.fakeServer.create();
+    this.server.autoRespond = true;
+    this.server.respondWith("GET", "http://example.com/my-doc.svg",
+      [200, { "Content-Type": "application/svg" }, '<svg>some document</svg>']);
   }});
 
   after(function() { with(this) {
-    this.xhr.restore();
+    this.server.restore();
   }});
 
   describe('loading from a remote URI', function() { with(this) {
-    it('embeds the SVG into the placeholder of the document', function() { with(this) {
-      var remoteSvg = new RemoteSvg('my-svg');
-      this.requests[0].respond(200, { "Content-Type": "application/svg" },
-        '<svg>some document</svg>');
+    it('embeds the SVG into the placeholder of the document', function(resume) { with(this) {
+      var promise = new RemoteSvg('my-svg');
 
-      assertEqual(1, this.requests.length);
-      assertEqual('<svg id="my-svg">some document</svg>', document.getElementById('fixture').innerHTML);
+      promise.then(function() {
+        assertEqual('<svg id="my-svg">some document</svg>', document.getElementById('fixture').innerHTML);
+        resume();
+      });
     }});
   }});
 
   describe('when the placeholder does not exist', function() { with(this) {
-    it('does nothing', function() { with(this) {
-      var remoteSvg = new RemoteSvg('nonexistent');
+    it('does nothing', function(resume) { with(this) {
+      var promise = new RemoteSvg('nonexistent');
 
-      assertEqual('', document.getElementById('my-svg').innerHTML);
+      promise.then(function() {
+        assertEqual('', document.getElementById('my-svg').innerHTML);
+        return resume();
+      });
     }});
   }});
 
   describe('when the remote URI cannot be fetched', function() { with(this) {
-    it('complains, discretely', function() { with(this) {
-      var remoteSvg = new RemoteSvg('my-svg');
+    it('complains, discretely', function(resume) { with(this) {
+      this.server.respondWith("GET", "http://example.com/my-doc.svg",
+        [500, { "Content-Type": "text/html" }, 'Error!']);
 
-      this.requests[0].respond(500, { "Content-Type": "application/svg" },
-        'Error!');
+      var promise = new RemoteSvg('my-svg');
 
-      assertEqual('<!-- SVG at "http://example.com/my-doc.svg" could not be loaded -->', document.getElementById('my-svg').innerHTML);
+      promise.then(function() {
+        assertEqual('<!-- SVG at "http://example.com/my-doc.svg" could not be loaded -->', document.getElementById('my-svg').innerHTML);
+        resume();
+      });
     }});
   }});
 
   describe('transformations', function() { with(this) {
-    it('adds a class to the document', function() { with(this) {
+    it('adds a class to the document', function(resume) { with(this) {
       var placeholder = document.getElementById('my-svg')
       placeholder.setAttribute('data-remote-svg-class', 'some-class');
 
-      var remoteSvg = new RemoteSvg('my-svg');
+      var promise = new RemoteSvg('my-svg');
 
-      this.requests[0].respond(200, { "Content-Type": "application/svg" },
-        '<svg>some document</svg>');
-
-      assertEqual('<svg id="my-svg" class="some-class">some document</svg>', document.getElementById('fixture').innerHTML);
+      promise.then(function() {
+        assertEqual('<svg id="my-svg" class="some-class">some document</svg>', document.getElementById('fixture').innerHTML);
+        resume();
+      });
     }});
   }});
 }});
