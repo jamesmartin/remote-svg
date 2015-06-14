@@ -14,7 +14,7 @@ JS.Test.describe('RemoteSvg', function() { with(this) {
 
   describe('loading from a remote URI', function() { with(this) {
     it('embeds the SVG into the placeholder of the document', function(resume) { with(this) {
-      var promise = new RemoteSvg('my-svg');
+      var promise = new RemoteSvg(document.getElementById('my-svg'));
 
       promise.then(function() {
         assertEqual('<svg id="my-svg">some document</svg>', document.getElementById('fixture').innerHTML);
@@ -25,7 +25,18 @@ JS.Test.describe('RemoteSvg', function() { with(this) {
 
   describe('when the placeholder does not exist', function() { with(this) {
     it('does nothing', function(resume) { with(this) {
-      var promise = new RemoteSvg('nonexistent');
+      var promise = new RemoteSvg(document.getElementById('nonexistent'));
+
+      promise.then(function() {
+        assertEqual('', document.getElementById('my-svg').innerHTML);
+        return resume();
+      });
+    }});
+  }});
+
+  describe('when not given an element placeholder', function() { with(this) {
+    it('does nothing', function(resume) { with(this) {
+      var promise = new RemoteSvg('not an element');
 
       promise.then(function() {
         assertEqual('', document.getElementById('my-svg').innerHTML);
@@ -39,7 +50,7 @@ JS.Test.describe('RemoteSvg', function() { with(this) {
       this.server.respondWith("GET", "http://example.com/my-doc.svg",
         [500, { "Content-Type": "text/html" }, 'Error!']);
 
-      var promise = new RemoteSvg('my-svg');
+      var promise = new RemoteSvg(document.getElementById('my-svg'));
 
       promise.then(function() {
         assertEqual('<!-- SVG at "http://example.com/my-doc.svg" could not be loaded -->', document.getElementById('my-svg').innerHTML);
@@ -53,7 +64,7 @@ JS.Test.describe('RemoteSvg', function() { with(this) {
       var placeholder = document.getElementById('my-svg')
       placeholder.setAttribute('data-remote-svg-class', 'some-class');
 
-      var promise = new RemoteSvg('my-svg');
+      var promise = new RemoteSvg(document.getElementById('my-svg'));
 
       promise.then(function() {
         assertEqual('<svg id="my-svg" class="some-class">some document</svg>', document.getElementById('fixture').innerHTML);
