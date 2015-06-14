@@ -19,7 +19,7 @@ Simply add a (ideally hidden) DOM element in your document, with an ID and (at l
 
 
 <script>
-  new RemoteSvg('my-svg');
+  new RemoteSvg(document.getElementById('my-svg'));
 </script>
 ```
 
@@ -32,6 +32,16 @@ div, like this:
 <svg id='my-svg'>
   <!-- svg data ... -->
 </svg>
+```
+
+The RemoteSvg constructor returns a promise, so you can run your own code once the SVG has been fetched from the remote URI, transformed and embedded inline:
+
+```html
+<script>
+  new RemoteSvg(document.getElementById('my-svg'))
+  .then(function() { console.log('My SVG has been loaded!'); })
+  .catch(function(err) { console.log('Something went wrong: ' + err); });
+</script>
 ```
 
 ## Transformations
