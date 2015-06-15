@@ -1,3 +1,4 @@
+var sinon = require('sinon');
 JS.Test.describe('RemoteSvg', function() { with(this) {
   fixture("<div id='my-svg' data-remote-svg-uri='http://example.com/my-doc.svg'></div>");
 
