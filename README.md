@@ -6,7 +6,15 @@ Add CSS classes, remove comments, add description and title elements and specify
 
 ## Install
 
-TODO
+___WARNING___: This library is pre-release. You could, theoretically take the [./lib/remote\_svg.js](./lib/remote_svg.js) file and use it (it has no external dependencies), but it's not ready for production use.
+
+```javascript
+import {RemoteSvg} from 'lib/remote_svg';
+
+new RemoteSvg(document.getElementById('some-id'));
+```
+
+Do this at your own risk.
 
 ## Use
 
