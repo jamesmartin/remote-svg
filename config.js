@@ -12,7 +12,7 @@ System.config({
   "map": {
     "browser-sync": "npm:browser-sync@2.7.10",
     "jstest": "npm:jstest@1.0.5",
-    "sinon": "npm:sinon@1.15.0",
+    "sinon": "npm:sinon@1.15.3",
     "traceur": "github:jmcriffey/bower-traceur@0.0.88",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -1039,6 +1039,13 @@ System.config({
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:sinon@1.15.0": {
+      "formatio": "npm:formatio@1.1.1",
+      "lolex": "npm:lolex@1.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "samsam": "npm:samsam@1.1.2",
+      "util": "npm:util@0.10.3"
+    },
+    "npm:sinon@1.15.3": {
       "formatio": "npm:formatio@1.1.1",
       "lolex": "npm:lolex@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1",

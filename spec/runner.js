@@ -1,18 +1,19 @@
 // spec/runner.js
 
-var JS = require('jstest');
-
-var run = function() { JS.Test.autorun() }
+import JS from 'jstest';
 
 var ROOT = JS.ENV.ROOT || '.'
 JS.cache = false
 
-require('remotesvg');
-require('./helpers')
-require('./remote_svg_spec')
+import {RemoteSvg} from '../lib/remote_svg';
+
+import helpers from './helpers';
+helpers(JS);
+
+import sinon from 'sinon';
+import spec from './remote_svg_spec';
+
+spec(sinon, RemoteSvg);
+var run = function() { JS.Test.autorun() }
 run();
 
-//JS.load(  ROOT + '/lib/remote_svg.js',
-//          ROOT + '/spec/helpers.js',
-//          ROOT + '/spec/remote_svg_spec.js',
-//          run)

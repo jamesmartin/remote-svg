@@ -3,7 +3,8 @@
     "directories": {},
     "dependencies": {
       "browser-sync": "npm:browser-sync@^2.7.10",
-      "jstest": "npm:jstest@^1.0.5"
+      "jstest": "npm:jstest@^1.0.5",
+      "sinon": "npm:sinon@^1.15.3"
     },
     "devDependencies": {
       "jstest": "npm:jstest@^1.0.5",
@@ -14,7 +15,13 @@
     "overrides": {
       "npm:jstest@1.0.5": {
         "format": "global"
+      },
+      "npm:sinon@1.15.0": {
+        "format": "global"
       }
     }
+  },
+  "devDependencies": {
+    "jspm": "^0.15.7"
   }
 }
