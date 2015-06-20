@@ -4,6 +4,7 @@
     "dependencies": {
       "browser-sync": "npm:browser-sync@^2.7.10",
       "jstest": "npm:jstest@^1.0.5",
+      "lie": "npm:lie@^2.9.1",
       "sinon": "npm:sinon@^1.15.3"
     },
     "devDependencies": {
