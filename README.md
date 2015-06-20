@@ -6,7 +6,15 @@ Add CSS classes, remove comments, add description and title elements and specify
 
 ## Install
 
-TODO
+___WARNING___: This library is pre-release. You could, theoretically take the [./lib/remote\_svg.js](./lib/remote_svg.js) file and use it (it has no external dependencies), but it's not ready for production use.
+
+```javascript
+import {RemoteSvg} from 'lib/remote_svg';
+
+new RemoteSvg(document.getElementById('some-id'));
+```
+
+Do this at your own risk.
 
 ## Use
 
@@ -85,3 +93,67 @@ The output of the above transformations:
 </svg>
 ```
 
+
+## Contributing
+
+Fork, branch, test, pull request. Thank you.
+
+
+### Local Development Setup
+
+RemoteSvg is written in (mostly) [ES6 module](http://developer.telerik.com/featured/choose-es6-modules-today/) syntax. Its dependencies are managed, loaded and polyfilled with [jspm.io](http://jspm.io) and [SystemJS](https://github.com/systemjs/systemjs).
+
+To get the tests running locally, do this:
+
+1. Clone this repo.
+1. Install [Node.js](https://nodejs.org).
+1. Install [jspm](http://jspm.io): `npm install -g jspm/jspm-cli && npm install jspm --save-dev`
+1. Install the dependencies locally (equivalent of bundle install in the Ruby world): `jspm install`
+1. Install [browser-sync](http://www.browsersync.io) (or your choice of live reloader) globally: `npm install --global browser-sync`
+1. Start a browser-sync server: `browser-sync start --server`
+1. Load the specs in your browser: [http://localhost:3000/spec/browser.html](http://localhost:3000/spec/browser.html)
+
+### Testing
+
+RemoteSvg is tested with [jstest](http://jstest.jcoglan.com). Those familiar with jstest will be aware of the framework's use of the `with(this)` pattern to minimize pollution of the global namespace. For example:
+
+```javascript
+JS.Test.describe('Some thing', function() { with(this) {
+    describe('returning some value', function() { with(this) {
+        it('does what we expect', function() { with(this) {
+          assertEqual('some value', ourFunction());
+        }});
+      }});
+  }});
+```
+
+Because RemoteSvg and its tests are loaded as ES6 modules, we are forced to run the tests in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode), which means we can't use the `with(this)` syntax, and our tests end up looking like this:
+
+```javascript
+JS.Test.describe('Some thing', function() {
+    this.describe('returning some value', function() {
+        this.it('does what we expect', function() {
+          this.assertEqual('some value', ourFunction());
+        });
+      });
+  });
+```
+
+You will notice that because we also use Promises, and jstest's [asynchronous tests](http://jstest.jcoglan.com/async.html), we also have to extract some of our assertions out into partially applied functions, in order to keep jstest's `this` and asnyc `resume` functions in scope:
+```javascript
+JS.Test.describe('Some promise-based thing', function() {
+    this.describe('returning some value', function() {
+        this.it('does what we expect, eventually', function(resume) {
+
+          var assertion = (function(jstest, resume) {
+              return function(actual) {
+                  jstest.assertEqual("expected", actual);
+                  return resume();
+                }
+            })(this, resume);
+
+          ourPromiseFunction().then(assertion);
+        });
+      });
+  });
+```

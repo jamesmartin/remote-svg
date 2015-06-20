@@ -1,15 +1,19 @@
 // spec/runner.js
 
-var run = function() { JS.Test.autorun() }
+import JS from 'jstest';
 
 var ROOT = JS.ENV.ROOT || '.'
 JS.cache = false
 
-JS.load(  ROOT + '/lib/remote_svg.js',
-          ROOT + '/spec/helpers.js',
-          ROOT + '/spec/remote_svg_spec.js',
-          ROOT + '/build/sinon-1.15.0.js',
+import {RemoteSvg} from '../lib/remote_svg';
 
-          // add files here as the project grows
+import helpers from './helpers';
+helpers(JS);
 
-          run)
+import sinon from 'sinon';
+import spec from './remote_svg_spec';
+
+spec(sinon, RemoteSvg);
+var run = function() { JS.Test.autorun() }
+run();
+

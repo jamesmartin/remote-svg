@@ -8,9 +8,12 @@
   </head>
   <body>
 
-    <script src="../build/jstest.js"></script>
-    <script>ROOT = '..'</script>
-    <script src="./runner.js"></script>
+    <script src="/jspm_packages/system.js"></script>
+    <script src="/config.js"></script>
+    <script>
+      ROOT = '..'
+      System.import('./spec/runner');
+    </script>
 
   </body>
 </html>
