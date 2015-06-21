@@ -96,7 +96,7 @@ The output of the above transformations:
 
 ## Contributing
 
-Fork, branch, test, pull request. Thank you.
+Please fork, branch, test & pull-request. Thank you.
 
 
 ### Local Development Setup
@@ -109,9 +109,10 @@ To get the tests running locally, do this:
 1. Install [Node.js](https://nodejs.org).
 1. Install [jspm](http://jspm.io): `npm install -g jspm/jspm-cli && npm install jspm --save-dev`
 1. Install the dependencies locally (equivalent of bundle install in the Ruby world): `jspm install`
-1. Install [browser-sync](http://www.browsersync.io) (or your choice of live reloader) globally: `npm install --global browser-sync`
-1. Start a browser-sync server: `browser-sync start --server`
-1. Load the specs in your browser: [http://localhost:3000/spec/browser.html](http://localhost:3000/spec/browser.html)
+1. I recommend using a simple reloading server, like [live-server](https://www.npmjs.com/package/live-server): `npm install --global live-server`
+    * Start live-server: `live-server`
+    * Load the specs in your browser: [http://localhost:8080/spec/browser.html](http://localhost:8080/spec/browser.html)
+    * Write tests, rinse, repeat.
 
 ### Testing
 
