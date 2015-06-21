@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>RemoteSVG</title>
+    <style>
+      .svg .little-red {
+        width: 5em;
+        height: 5em;
+        fill: red;
+      }
+    </style>
+  </head>
+  <body>
+
+    <script src="/jspm_packages/system.js"></script>
+    <script src="/config.js"></script>
+    <script>
+      System.import('example/load-svg');
+    </script>
+
+    <div class="svg">
+      <div id="my-svg" data-remote-svg-class="little-red" data-remote-svg-uri="/example/iconmonstr-glasses-12-icon.svg"></div>
+    </div>
+
+  </body>
+</html>
+
