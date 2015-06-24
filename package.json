@@ -2,7 +2,8 @@
   "jspm": {
     "directories": {},
     "dependencies": {
-      "lie": "npm:lie@^2.9.1"
+      "lie": "npm:lie@^2.9.1",
+      "underscore": "npm:underscore@^1.8.3"
     },
     "devDependencies": {
       "jstest": "npm:jstest@^1.0.5",
