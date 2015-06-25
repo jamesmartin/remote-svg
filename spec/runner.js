@@ -5,7 +5,7 @@ import JS from 'jstest';
 var ROOT = JS.ENV.ROOT || '.'
 JS.cache = false
 
-import {RemoteSvg} from '../lib/remote_svg';
+import {RemoteSvg} from 'lib/index';
 
 import helpers from './helpers';
 helpers(JS);

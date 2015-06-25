@@ -1,4 +1,4 @@
-import {RemoteSvg} from 'lib/remote_svg'
+import {RemoteSvg} from 'lib/index'
 
 new RemoteSvg(document.getElementById('my-svg'))
 .then(function() { return console.log('SVG Loaded!'); })
