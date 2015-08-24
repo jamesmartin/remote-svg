@@ -4,6 +4,10 @@ Embed and transform SVG documents from remote locations.
 
 Add CSS classes, remove comments, add description and title elements and specify height and width attributes.
 
+## Changelog
+
+All notable changes to this project are documented in the [CHANGELOG](./CHANGELOG.md).
+
 ## Install
 
 RemoteSVG is an ES6 module that can be installed via [jspm](http://jspm.io). For example, install version 0.1.0 like this:
