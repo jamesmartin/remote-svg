@@ -15,18 +15,41 @@ RemoteSVG is an ES6 module that can be installed via [jspm](http://jspm.io). For
 Simply add a (ideally hidden) DOM element in your document, with an ID and (at least) the following data attribute:
 
 ```html
-<h1>My Document</h1>
-
-<div id='my-svg' data-remote-svg-uri='http://example.com/my-doc.svg'></div>
-
+<!doctype html>
+<script src="jspm_packages/system.js"></script>
+<script src="config.js"></script>
 <script>
-  import {RemoteSvg} from 'lib/remote_svg';
-  new RemoteSvg(document.getElementById('my-svg'));
+  System.import('lib/main');
 </script>
+
+<body>
+  <div id='my-svg' data-remote-svg-uri='/my-doc.svg' data-remote-svg-class='little-red'></div>
+</body>
 ```
 
-The SVG will be fetched from the remote location and embedded in place of your
-div, like this:
+The RemoteSvg constructor returns a promise, so you can run your own code once the SVG has been fetched from the remote URI, transformed and embedded inline.
+Load the SVG [like this](https://github.com/jamesmartin/remote-svg-example/blob/master/lib/main.js):
+
+```javascript
+import './style.css!';
+import {RemoteSvg} from 'remote-svg';
+
+new RemoteSvg(document.getElementById('my-svg'))
+.then(function() { console.log('SVG loaded...'); })
+.catch(function(err) { console.log('Something went wrong: ' + err); });
+```
+
+Here is the [simple stylesheet](https://github.com/jamesmartin/remote-svg-example/blob/master/lib/style.css) we use:
+
+```css
+.little-red {
+  width: 5em;
+  height: 5em;
+  fill: red;
+}
+```
+
+The SVG will be fetched from the remote location and embedded in place of your div, like this:
 
 ```html
 <h1>My Document</h1>
@@ -36,15 +59,7 @@ div, like this:
 </svg>
 ```
 
-The RemoteSvg constructor returns a promise, so you can run your own code once the SVG has been fetched from the remote URI, transformed and embedded inline:
-
-```html
-<script>
-  new RemoteSvg(document.getElementById('my-svg'))
-  .then(function() { console.log('My SVG has been loaded!'); })
-  .catch(function(err) { console.log('Something went wrong: ' + err); });
-</script>
-```
+The full, working, [example code is available](https://github.com/jamesmartin/remote-svg-example).
 
 ## Transformations
 
