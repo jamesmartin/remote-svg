@@ -8,7 +8,7 @@ Add CSS classes, remove comments, add description and title elements and specify
 
 RemoteSVG is an ES6 module that can be installed via [jspm](http://jspm.io). For example, install version 0.1.0 like this:
 
-`jspm install remote-svg:github.com:jamesmartin/remote-svg@0.1.0`
+`jspm install remote-svg=github:jamesmartin/remote-svg@0.1.0`
 
 ## Use
 
