@@ -56,8 +56,6 @@ Here is the [simple stylesheet](https://github.com/jamesmartin/remote-svg-exampl
 The SVG will be fetched from the remote location and embedded in place of your div, like this:
 
 ```html
-<h1>My Document</h1>
-
 <svg id='my-svg'>
   <!-- svg data ... -->
 </svg>
