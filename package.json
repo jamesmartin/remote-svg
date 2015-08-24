@@ -2,6 +2,7 @@
   "repository": "http://github.com/jamesmartin/remote-svg",
   "registry": "jspm",
   "version": "0.1.0",
+  "format": "es6",
   "main": "lib/index",
   "jspm": {
     "directories": {},
