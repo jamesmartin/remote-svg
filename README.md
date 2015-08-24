@@ -6,15 +6,9 @@ Add CSS classes, remove comments, add description and title elements and specify
 
 ## Install
 
-___WARNING___: This library is pre-release. You could, theoretically take the [./lib/remote\_svg.js](./lib/remote_svg.js) file and use it (it has no external dependencies), but it's not ready for production use.
+RemoteSVG is an ES6 module that can be installed via [jspm](http://jspm.io). For example, install version 0.1.0 like this:
 
-```javascript
-import {RemoteSvg} from 'lib/remote_svg';
-
-new RemoteSvg(document.getElementById('some-id'));
-```
-
-Do this at your own risk.
+`jspm install remote-svg:github.com:jamesmartin/remote-svg@0.1.0`
 
 ## Use
 
@@ -25,8 +19,8 @@ Simply add a (ideally hidden) DOM element in your document, with an ID and (at l
 
 <div id='my-svg' data-remote-svg-uri='http://example.com/my-doc.svg'></div>
 
-
 <script>
+  import {RemoteSvg} from 'lib/remote_svg';
   new RemoteSvg(document.getElementById('my-svg'));
 </script>
 ```
