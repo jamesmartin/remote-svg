@@ -72,7 +72,7 @@ export default function(sinon, RemoteSvg) {
           }
         })(this, resume);
 
-        promise.then(check);
+        promise.catch(check);
       });
     });
 
