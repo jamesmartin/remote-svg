@@ -11,13 +11,13 @@
       "underscore": "npm:underscore@^1.8.3"
     },
     "devDependencies": {
-      "traceur": "github:jmcriffey/bower-traceur@0.0.88",
-      "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88"
+      "traceur": "github:jmcriffey/bower-traceur@0.0.91",
+      "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.91"
     }
   },
   "devDependencies": {
     "jstest": "npm:jstest@^1.0.5",
     "sinon": "npm:sinon@1.15.3",
-    "jspm": "^0.15.7"
+    "jspm": "^0.16"
   }
 }
