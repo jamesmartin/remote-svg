@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
-- Nothing.
+- [Upgrade](https://github.com/jamesmartin/remote-svg/issues/7) to SystemJS 0.18 and jspm 0.16.
 
 ## [0.1.1] - 2015-08-25
 ### Fixed
